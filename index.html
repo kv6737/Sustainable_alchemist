@@ -4,6 +4,7 @@
 	<title>Sustainable Alchemist</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="sust.css">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBM8_EFrgBX8KfExxdqIUEqoyMNsgKAj28&libraries=places"></script>
 	<script>
 		var arr=new Array();
 		function AddData(){
@@ -12,7 +13,10 @@
 				name:document.getElementById("name").value,
                 student_id:document.getElementById("student_id").value,
                 course:document.getElementById("course").value,
-                Age:document.getElementById("Age").value
+                Age:document.getElementById("Age").value,
+                location:document.getElementById("locationTextField").value
+
+
                 
 			});
 			localStorage.setItem("localData",JSON.stringify(arr));
@@ -44,15 +48,18 @@
 			  		var cell2 = row.insertCell();
 			  		var cell3 = row.insertCell();
 			  		var cell4 = row.insertCell();
+			  		var cell5= row.insertCell();
 			 	    cell1.innerHTML = arr[i].name;
 			 	    cell2.innerHTML = arr[i].student_id;
 			 	    cell3.innerHTML = arr[i].course;
 			 	    cell4.innerHTML = arr[i].Age;
+			 	    cell5.innerHTML = arr[i].location;
                 } 
 
 		}
 		
 	</script>
+	
 </head>
 <body>
 	<div class="container">
@@ -72,9 +79,11 @@
 			    <input name="course" id="course"class="form-control"></input>
 			    <label for="student_id">Age</label>
 			    <input name="age"type="number" id="Age"class="form-control"></input>
+			    <label for="locationTextField">Location</label>
+        		<input id="locationTextField" type="text" class="form-control"></input>
 			  
 			  <input type="submit" value="Submit"class="btn btn-primary"></input>
-			  <input type="button" value="Clear All" onclick="deletedata();"class="btn btn-info"/>
+			  <input type="button" value="Clear All" class="btn btn-info"onclick="deletedata();"/>
 		</form>
           
 		
@@ -85,6 +94,7 @@
 		    <th>Student Id</td>
 		    <th>Course</th>
 		    <th>Age</th>
+		    <th>Location</th>
 		  </tr>
 		
 </table>
@@ -94,5 +104,13 @@
     <script>
     	ShowData();
     </script> 
+   <script>
+            function init() {
+                var input = document.getElementById('locationTextField');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+
+            google.maps.event.addDomListener(window, 'load', init);
+        </script>
 </body>
 </html>
