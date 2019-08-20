@@ -4,6 +4,55 @@
 	<title>Sustainable Alchemist</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="sust.css">
+	<script>
+		var arr=new Array();
+		function AddData(){
+			GetData()
+			arr.push({
+				name:document.getElementById("name").value,
+                student_id:document.getElementById("student_id").value,
+                course:document.getElementById("course").value,
+                Age:document.getElementById("Age").value
+                
+			});
+			localStorage.setItem("localData",JSON.stringify(arr));
+			ShowData();
+		}
+		function GetData(){
+			var str=localStorage.getItem("localData");
+			if(str!=null)
+				arr=JSON.parse(str);
+		}
+		function deletedata()
+		{
+			localStorage.clear()
+		}
+		function ShowData()
+		{ GetData();
+			   
+                var table = document.getElementById("myTable");
+		         var le=table.rows.length;
+		         while(le!=1)
+		         {
+		         	table.deleteRow(le);
+		         	le--;
+		         }
+                for(var i=0;i<arr.length;i++)
+                {
+                    var row = table.insertRow();
+			  		var cell1 = row.insertCell();
+			  		var cell2 = row.insertCell();
+			  		var cell3 = row.insertCell();
+			  		var cell4 = row.insertCell();
+			 	    cell1.innerHTML = arr[i].name;
+			 	    cell2.innerHTML = arr[i].student_id;
+			 	    cell3.innerHTML = arr[i].course;
+			 	    cell4.innerHTML = arr[i].Age;
+                } 
+
+		}
+		
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -13,17 +62,37 @@
 			<h3>~Kshitiz</h3>
 		</div>
 		
-		<form>
-	  		<input id="item" type="text" placeholder="Resource" class="form-control" required />
+		
+		 <form  onsubmit="AddData(); return false;">
+			     <label for="name">Name</label>
+			    <input type="text" name="name" id="name"class="form-control"/>
+			    <label for="student_id">Student ID</label>
+			    <input type="number" name="student_id" id="student_id"class="form-control"/>
+			    <label for="student_id">Course</label>
+			    <input name="course" id="course"class="form-control"></input>
+			    <label for="student_id">Age</label>
+			    <input name="age"type="number" id="Age"class="form-control"></input>
+			  
+			  <input type="submit" value="Submit"class="btn btn-primary"></input>
+			  <input type="button" value="Clear All" onclick="deletedata();"class="btn btn-info"/>
 		</form>
-
-		<h2>Resources</h2>
-		<ul></ul>
-      <br>
+          
+		
       
+      <table id="myTable" style="width:50%">
+		  <tr>
+		    <th>Name</th>
+		    <th>Student Id</td>
+		    <th>Course</th>
+		    <th>Age</th>
+		  </tr>
+		
+</table>
 
-		<button type="button" class="btn btn-success">Clear All</button>
+		
     </div>
-    <script type="text/javascript" src="sus.js"></script>
+    <script>
+    	ShowData();
+    </script> 
 </body>
 </html>
