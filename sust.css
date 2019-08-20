@@ -1,5 +1,4 @@
 body{
-	background-color: lightgreen;
 	background-image: url("sustainable.jpg");
     background-repeat: no-repeat;
      /*background-size: 250px;*/
@@ -16,4 +15,15 @@ li{
 	font-family: "Times New Roman", Times, serif;
 	font-style: italic;
 	font-size:20px;
+}
+table{
+	text-transform:capitalize;
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic;
+	font-size:20px;
+	width:50%;
+	
+}
+table td{
+	 border: 1px solid black;
 }
